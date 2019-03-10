@@ -4,13 +4,12 @@ import BookRow from "./BookRow";
 import SearchBar from "./SearchBar";
 class BookTable extends Component {
   state = {
-    filterbooks: this.props.books
+    filterbooks: this.props.books.filter(book => book.color === this.props.match.params.booksCol)
   };
-
   filterbooks = query => {
     query = query.toLowerCase();
     let filteredbooks = this.props.books.filter(books =>
-      `${books.title}`.toLowerCase().includes(query)
+      (`${books.title}`.toLowerCase().includes(query) && books.color === this.props.match.params.booksCol)
     );
     this.setState({ filterbooks: filteredbooks });
   };
